@@ -1,0 +1,28 @@
+# Docker
+.docker/
+
+# Symfony
+/backend/var/
+/backend/vendor/
+/backend/.env.local
+/backend/.env.local.php
+/backend/.env.*.local
+/backend/config/secrets/prod/prod.decrypt.private.php
+/backend/public/bundles/
+
+# Vue
+/frontend/node_modules/
+/frontend/dist/
+/frontend/.env.local
+/frontend/.env.*.local
+/frontend/npm-debug.log*
+/frontend/yarn-debug.log*
+/frontend/yarn-error.log*
+/frontend/pnpm-debug.log*
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Database
+/docker-data/

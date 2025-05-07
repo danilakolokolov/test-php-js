@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: stock-backend
+    restart: always
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+    networks:
+      - stock-network
+
+  nginx:
+    image: nginx:alpine
+    container_name: stock-nginx
+    restart: always
+    ports:
+      - "8000:80"
+    volumes:
+      - ./:/var/www
+      - ./docker/nginx/conf.d:/etc/nginx/conf.d
+    networks:
+      - stock-network
+
+  database:
+    image: mysql:8.0
+    container_name: stock-db
+    restart: always
+    environment:
+      MYSQL_DATABASE: stock
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_PASSWORD: password
+      MYSQL_USER: user
+    volumes:
+      - db-data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - stock-network
+
+networks:
+  stock-network:
+    driver: bridge
+
+volumes:
+  db-data:
