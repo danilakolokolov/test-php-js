@@ -1,64 +1,64 @@
-# Stock Center Application
+# Приложение Stock Center
 
-A full-stack application for managing stock items with a Symfony backend and Vue.js frontend.
+Полноценное приложение для управления товарами на складе с бэкендом на Symfony и фронтендом на Vue.js.
 
-## Project Structure
+## Структура проекта
 
-The project is divided into two main parts:
+Проект разделен на две основные части:
 
-- `backend/` - Symfony PHP application that provides the API
-- `frontend/` - Vue.js application that provides the user interface
+- `backend/` - PHP приложение на Symfony, предоставляющее API
+- `frontend/` - Vue.js приложение, предоставляющее пользовательский интерфейс
 
-## Features
+## Функциональность
 
-- Add new items with name, price, and date/time
-- Validate input data on both frontend and backend
-- Display error messages for invalid inputs
-- Show a list of all items sorted by date and time
-- Responsive design
+- Добавление новых товаров с указанием наименования, цены и даты/времени
+- Валидация данных как на фронтенде, так и на бэкенде
+- Отображение сообщений об ошибках для некорректных данных
+- Отображение списка всех товаров, отсортированных по дате и времени
+- Адаптивный дизайн
 
-## Requirements
+## Требования
 
-- Docker and Docker Compose
+- Docker и Docker Compose
 
-## Installation and Setup
+## Установка и запуск
 
-1. Clone the repository
-2. Navigate to the project root directory
-3. Run the following command to start the application:
+1. Клонируйте репозиторий
+2. Перейдите в корневую директорию проекта
+3. Выполните следующую команду для запуска приложения:
 
 ```bash
 docker-compose up -d
 ```
 
-This will build and start all the required services:
-- Backend API (Symfony) - accessible at http://localhost:8000
-- Frontend (Vue.js) - accessible at http://localhost:8080
-- MySQL Database
+Эта команда соберет и запустит все необходимые сервисы:
+- Backend API (Symfony) - доступен по адресу http://localhost:8000
+- Frontend (Vue.js) - доступен по адресу http://localhost:8080
+- База данных MySQL
 
-## API Endpoints
+## Конечные точки API
 
-- `GET /api/items` - Get all items sorted by date and time
-- `POST /api/items` - Add a new item
+- `GET /api/items` - Получить все товары, отсортированные по дате и времени
+- `POST /api/items` - Добавить новый товар
 
-## Development
+## Разработка
 
-### Backend (Symfony)
+### Бэкенд (Symfony)
 
-The backend is built with Symfony 6.3 and uses:
-- Doctrine ORM for database interactions
-- Symfony Validator for input validation
-- Symfony Serializer for JSON responses
+Бэкенд построен на Symfony 6.3 и использует:
+- Doctrine ORM для взаимодействия с базой данных
+- Symfony Validator для валидации данных
+- Symfony Serializer для формирования JSON-ответов
 
-### Frontend (Vue.js)
+### Фронтенд (Vue.js)
 
-The frontend is built with Vue.js 3 and uses:
-- Axios for API requests
-- Custom CSS for styling
+Фронтенд построен на Vue.js 3 и использует:
+- Axios для запросов к API
+- Пользовательский CSS для стилизации
 
-## Docker Configuration
+## Конфигурация Docker
 
-Each part of the application has its own Docker configuration:
-- Backend: Dockerfile and docker-compose.yml in the `backend/` directory
-- Frontend: Dockerfile and docker-compose.yml in the `frontend/` directory
-- Root docker-compose.yml to run all services together
+Каждая часть приложения имеет собственную конфигурацию Docker:
+- Бэкенд: Dockerfile и docker-compose.yml в директории `backend/`
+- Фронтенд: Dockerfile и docker-compose.yml в директории `frontend/`
+- Корневой docker-compose.yml для запуска всех сервисов вместе
