@@ -1,0 +1,43 @@
+nelmio_api_doc:
+    documentation:
+        info:
+            title: Stock Center API
+            description: API для управления товарами на складе
+            version: 1.0.0
+        components:
+            schemas:
+                Item:
+                    type: object
+                    properties:
+                        id:
+                            type: integer
+                            example: 1
+                        name:
+                            type: string
+                            example: Headphones
+                        price:
+                            type: number
+                            format: float
+                            example: 10.00
+                        dateTime:
+                            type: string
+                            format: date-time
+                            example: 2021-01-11T10:00:00+00:00
+                Error:
+                    type: object
+                    properties:
+                        success:
+                            type: boolean
+                            example: false
+                        errors:
+                            type: object
+                            example:
+                                name: "Наименование товара не может быть пустым"
+                                price: "Цена должна быть положительным числом"
+                                dateTime: "Неверный формат даты и времени"
+    areas:
+        path_patterns:
+            - ^/api/(?!doc$)
+    
+    # Настройки для Swagger UI
+    models: { use_jms: false }

@@ -9,8 +9,10 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
+use OpenApi\Attributes as OA;
 
 #[Route('/api', name: 'api_')]
+#[OA\Tag(name: 'Товары')]
 class ItemController extends AbstractController
 {
     private ItemService $itemService;
@@ -23,6 +25,18 @@ class ItemController extends AbstractController
     }
 
     #[Route('/items', name: 'get_items', methods: ['GET'])]
+    #[OA\Get(
+        path: '/api/items',
+        summary: 'Получение списка всех товаров',
+        description: 'Возвращает список всех товаров, отсортированных по дате и времени',
+        responses: [
+            new OA\Response(
+                response: 200,
+                description: 'Успешный ответ',
+                content: new OA\JsonContent(type: 'array', items: new OA\Items(ref: '#/components/schemas/Item'))
+            )
+        ]
+    )]
     public function getItems(): JsonResponse
     {
         $result = $this->itemService->getAllItems();
@@ -36,6 +50,34 @@ class ItemController extends AbstractController
     }
 
     #[Route('/items', name: 'create_item', methods: ['POST'])]
+    #[OA\Post(
+        path: '/api/items',
+        summary: 'Добавление нового товара',
+        description: 'Добавляет новый товар в систему с валидацией данных',
+        requestBody: new OA\RequestBody(
+            description: 'Данные товара',
+            required: true,
+            content: new OA\JsonContent(
+                properties: [
+                    new OA\Property(property: 'name', type: 'string', example: 'Headphones', description: 'Наименование товара'),
+                    new OA\Property(property: 'price', type: 'number', format: 'float', example: 10.00, description: 'Цена товара в долларах'),
+                    new OA\Property(property: 'dateTime', type: 'string', example: '11.01.2021 10:00:00', description: 'Дата и время в формате дд.мм.гггг чч:мм:сс')
+                ]
+            )
+        ),
+        responses: [
+            new OA\Response(
+                response: 201,
+                description: 'Товар успешно добавлен',
+                content: new OA\JsonContent(ref: '#/components/schemas/Item')
+            ),
+            new OA\Response(
+                response: 400,
+                description: 'Ошибка валидации',
+                content: new OA\JsonContent(ref: '#/components/schemas/Error')
+            )
+        ]
+    )]
     public function createItem(Request $request): JsonResponse
     {
         $data = json_decode($request->getContent(), true);
